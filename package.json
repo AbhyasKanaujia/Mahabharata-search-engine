@@ -1,0 +1,21 @@
+{
+  "name": "mahabharat-app",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --env-file=.env app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@langchain/openai": "^0.2.8",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "langchain": "^0.2.17",
+    "nodemon": "^3.1.4"
+  }
+}

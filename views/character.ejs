@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= character.name %> - Character Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      img {
+        display: block;
+        margin: 20px auto;
+        max-width: 200px;
+        border-radius: 50%;
+      }
+      .section {
+        margin-bottom: 20px;
+      }
+      .section h2 {
+        font-size: 1.5em;
+        color: #555;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+      }
+      .section ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .section ul li {
+        background: #eee;
+        margin-bottom: 5px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .section ul li a {
+        text-decoration: none;
+        color: #333;
+      }
+      .section ul li a:hover {
+        color: #007bff;
+      }
+      .back-button {
+        display: block;
+        margin: 30px auto;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 200px;
+      }
+      .back-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <% if (character.name) { %>
+      <h1>
+        <%= character.name %><% if (character.title) { %> - <%= character.title
+        %><% } %>
+      </h1>
+      <% } %> <% if (imageURL) { %>
+      <img src="<%= imageURL %>" alt="<%= character.name %>" />
+      <% } %>
+
+      <div class="section">
+        <h2>Basic Information</h2>
+        <% if (character.gender) { %>
+        <p><strong>Gender:</strong> <%= character.gender %></p>
+        <% } %> <% if (character.weapon) { %>
+        <p><strong>Weapon:</strong> <%= character.weapon %></p>
+        <% } %>
+      </div>
+
+      <% if (character.affiliation && character.affiliation.length > 0) { %>
+      <div class="section">
+        <h2>Affiliations</h2>
+        <ul>
+          <% character.affiliation.forEach(function(affiliation) { %>
+          <li>
+            <a href="/character/<%= affiliation %>"><%= affiliation %></a>
+          </li>
+          <% }); %>
+        </ul>
+      </div>
+      <% } %> <% if (character.family) { %>
+      <div class="section">
+        <h2>Family</h2>
+        <% if (character.family.parents) { %> <% if
+        (character.family.parents.father) { %>
+        <p>
+          <strong>Father:</strong>
+          <a href="/character/<%= character.family.parents.father %>"
+            ><%= character.family.parents.father %></a
+          >
+        </p>
+        <% } %> <% if (character.family.parents.mother) { %>
+        <p>
+          <strong>Mother:</strong>
+          <a href="/character/<%= character.family.parents.mother %>"
+            ><%= character.family.parents.mother %></a
+          >
+        </p>
+        <% } %> <% } %> <% if (character.family.siblings &&
+        character.family.siblings.length > 0) { %>
+        <h3>Siblings:</h3>
+        <ul>
+          <% character.family.siblings.forEach(function(sibling) { %>
+          <li><a href="/character/<%= sibling %>"><%= sibling %></a></li>
+          <% }); %>
+        </ul>
+        <% } %>
+      </div>
+      <% } %> <% if (character.spouse && character.spouse.length > 0) { %>
+      <div class="section">
+        <h2>Spouse</h2>
+        <ul>
+          <% character.spouse.forEach(function(spouse) { %>
+          <li><a href="/character/<%= spouse %>"><%= spouse %></a></li>
+          <% }); %>
+        </ul>
+      </div>
+      <% } %> <% if (character.children && character.children.length > 0) { %>
+      <div class="section">
+        <h2>Children</h2>
+        <ul>
+          <% character.children.forEach(function(child) { %>
+          <li>
+            <strong>Name:</strong>
+            <a href="/character/<%= child.name %>"><%= child.name %></a> <% if
+            (child.childWith) { %> | <strong>Child with:</strong>
+            <a href="/character/<%= child.childWith %>"
+              ><%= child.childWith %></a
+            >
+            <% } %>
+          </li>
+          <% }); %>
+        </ul>
+      </div>
+      <% } %> <% if (character.relatives) { %>
+      <div class="section">
+        <% if (character.relatives.cousins && character.relatives.cousins.length
+        > 0) { %>
+        <h2>Cousins</h2>
+        <ul>
+          <% character.relatives.cousins.forEach(function(cousin) { %>
+          <li><a href="/character/<%= cousin %>"><%= cousin %></a></li>
+          <% }); %>
+        </ul>
+        <% } %> <% if (character.relatives.otherRelatives &&
+        character.relatives.otherRelatives.length > 0) { %>
+        <h2>Other Relatives</h2>
+        <ul>
+          <% character.relatives.otherRelatives.forEach(function(relative) { %>
+          <li><a href="/character/<%= relative %>"><%= relative %></a></li>
+          <% }); %>
+        </ul>
+        <% } %>
+      </div>
+      <% } %>
+
+      <a href="/" class="back-button">Back to Home</a>
+    </div>
+  </body>
+</html>
